@@ -1,0 +1,140 @@
+class Person {
+  String _name; 
+
+  Person(this._name);
+
+  String get name => _name; 
+
+  void setName(String name) {
+    if (name.isEmpty) {
+      throw Exception('ชื่อห้ามว่าง');
+    }
+    _name = name;
+  }
+}
+
+class Engine {
+  String _model; 
+  int _speed; 
+
+  Engine(this._model, this._speed);
+
+  String get model => _model; 
+
+  void setModel(String model) {
+    if (model.isEmpty) {
+      throw Exception('โมเดลเครื่องยนต์ห้ามว่าง');
+    }
+    _model = model;
+  }
+
+  int get speed => _speed; 
+
+  void setSpeed(int speed) {
+    if (speed < 0) {
+      throw Exception('ความเร็วต้องมากกว่า 0');
+    }
+    _speed = speed;
+  }
+
+  void displayEngineInfo() {
+    print('Model: $_model');
+    print('Speed: $_speed km/h');
+  }
+}
+
+class Car {
+  String _brand; 
+  String _model; 
+  Person _owner; 
+  Engine _engine; 
+
+  Car(this._brand, this._model, this._owner, this._engine);
+
+  String get brand => _brand; 
+
+  void setBrand(String brand) {
+    if (brand.isEmpty) {
+      throw Exception('ยี่ห้อรถห้ามว่าง');
+    }
+    _brand = brand;
+  }
+
+  String get model => _model; 
+
+  void setModel(String model) {
+    if (model.isEmpty) {
+      throw Exception('รุ่นรถห้ามว่าง');
+    }
+    _model = model;
+  }
+
+  Person get owner => _owner; 
+
+  void setOwner(Person owner) {
+    _owner = owner;
+  }
+
+  Engine get engine => _engine; 
+
+  void setEngine(Engine engine) {
+    _engine = engine;
+  }
+
+  void displayCarInfo() {
+    print('--- ข้อมูลรถ ---');
+    print('ยี่ห้อ: $_brand');
+    print('รุ่น: $_model');
+    print('เจ้าของ: ${_owner.name}');
+    print('ข้อมูลเครื่องยนต์:');
+    _engine.displayEngineInfo();
+  }
+
+  void run() {
+    print('ความเร็ว: ${_engine.speed} km/h');
+  }
+}
+
+class Honda extends Car {
+  String _color; 
+
+  Honda(String brand, String model, Person owner, Engine engine, this._color)
+      : super(brand, model, owner, engine);
+
+  String get color => _color; 
+
+  void setColor(String color) {
+    _color = color;
+  }
+
+  
+  void run() {
+    print('ความเร็ว: 120 km/h'); 
+  }
+
+  
+  void displayCarInfo() {
+    super.displayCarInfo(); 
+    print('สี: $_color');
+  }
+}
+
+void main() {
+  
+  Person owner = Person('พะเพง');
+
+  
+  Engine engine = Engine('V8', 220);
+
+  
+  Honda car = Honda('Honda', 'Civic', owner, engine, 'ขาว');
+
+  
+  car._color = 'ขาว';
+
+  
+  car.displayCarInfo();
+
+  
+  car.run();
+}
